@@ -1,3 +1,4 @@
+{{-- resources/views/layouts/navigation.blade.php --}}
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,6 +16,28 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    
+                    @if(Auth::user()->is_admin)
+                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                            <i class="bi bi-speedometer2 me-1"></i>Admin Dashboard
+                        </x-nav-link>
+                        
+                        <x-nav-link :href="'#'" :active="request()->routeIs('admin.peralatan*')">
+                            <i class="bi bi-truck me-1"></i>Peralatan
+                        </x-nav-link>
+                        
+                        <x-nav-link :href="'#'" :active="request()->routeIs('admin.pesanan*')">
+                            <i class="bi bi-clipboard-data me-1"></i>Pesanan
+                        </x-nav-link>
+                        
+                        <x-nav-link :href="'#'" :active="request()->routeIs('admin.pembayaran*')">
+                            <i class="bi bi-credit-card me-1"></i>Verifikasi
+                        </x-nav-link>
+                        
+                        <x-nav-link :href="'#'" :active="request()->routeIs('admin.pengaturan*')">
+                            <i class="bi bi-sliders me-1"></i>Pengaturan
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -24,6 +47,9 @@
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
+                            @if(Auth::user()->is_admin)
+                                <span class="ms-1 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Admin</span>
+                            @endif
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -70,6 +96,28 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            
+            @if(Auth::user()->is_admin)
+                <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                    Admin Dashboard
+                </x-responsive-nav-link>
+                
+                <x-responsive-nav-link :href="'#'" :active="request()->routeIs('admin.peralatan*')">
+                    Peralatan
+                </x-responsive-nav-link>
+                
+                <x-responsive-nav-link :href="'#'" :active="request()->routeIs('admin.pesanan*')">
+                    Pesanan
+                </x-responsive-nav-link>
+                
+                <x-responsive-nav-link :href="'#'" :active="request()->routeIs('admin.pembayaran*')">
+                    Verifikasi Pembayaran
+                </x-responsive-nav-link>
+                
+                <x-responsive-nav-link :href="'#'" :active="request()->routeIs('admin.pengaturan*')">
+                    Pengaturan
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
@@ -77,6 +125,9 @@
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                @if(Auth::user()->is_admin)
+                    <div class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded inline-block mt-1">Admin</div>
+                @endif
             </div>
 
             <div class="mt-3 space-y-1">

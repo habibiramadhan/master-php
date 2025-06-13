@@ -1,5 +1,7 @@
 <?php
 // app/Models/Pesanan.php
+namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -42,7 +44,6 @@ class Pesanan extends Model
         'waktu_verifikasi' => 'datetime',
     ];
 
-    // Constants untuk status
     const STATUS_MENUNGGU_PEMBAYARAN = 'menunggu_pembayaran';
     const STATUS_BUKTI_BAYAR_DIUPLOAD = 'bukti_bayar_diupload';
     const STATUS_TERVERIFIKASI = 'terverifikasi';
@@ -50,7 +51,6 @@ class Pesanan extends Model
     const STATUS_SELESAI = 'selesai';
     const STATUS_DIBATALKAN = 'dibatalkan';
 
-    // Boot method untuk generate kode
     protected static function boot()
     {
         parent::boot();
@@ -62,7 +62,6 @@ class Pesanan extends Model
         });
     }
 
-    // Relationships
     public function peralatan()
     {
         return $this->belongsTo(Peralatan::class, 'peralatan_id');
@@ -73,7 +72,6 @@ class Pesanan extends Model
         return $this->belongsTo(User::class, 'diverifikasi_oleh');
     }
 
-    // Accessors
     public function getTotalHargaFormatAttribute()
     {
         return 'Rp ' . number_format($this->total_harga, 0, ',', '.');
@@ -120,7 +118,6 @@ class Pesanan extends Model
         return $namaStatus[$this->status] ?? 'Tidak Diketahui';
     }
 
-    // Scopes
     public function scopeMenungguPembayaran($query)
     {
         return $query->where('status', self::STATUS_MENUNGGU_PEMBAYARAN);
@@ -151,13 +148,11 @@ class Pesanan extends Model
         return $query->where('status', self::STATUS_DIBATALKAN);
     }
 
-    // Methods
     public static function generateKodePesanan()
     {
         $prefix = 'PSN';
         $tanggal = date('ymd');
         
-        // Dapatkan jumlah pesanan hari ini
         $jumlah = self::whereDate('created_at', today())->count() + 1;
         
         return $prefix . '-' . $tanggal . '-' . str_pad($jumlah, 3, '0', STR_PAD_LEFT);
@@ -174,7 +169,7 @@ class Pesanan extends Model
     {
         $mulai = Carbon::parse($this->tanggal_mulai);
         $selesai = Carbon::parse($this->tanggal_selesai);
-        return $mulai->diffInDays($selesai) + 1; // Termasuk hari mulai
+        return $mulai->diffInDays($selesai) + 1;
     }
 
     public function hitungTotalHarga()
@@ -224,4 +219,3 @@ class Pesanan extends Model
         return $this->status === self::STATUS_BUKTI_BAYAR_DIUPLOAD;
     }
 }
-

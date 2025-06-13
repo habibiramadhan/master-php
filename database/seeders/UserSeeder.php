@@ -17,21 +17,5 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'is_admin' => true,
         ]);
-
-        User::create([
-            'name' => 'Manager Operasional',
-            'email' => 'manager@sewaalatberat.com',
-            'password' => Hash::make('manager123'),
-            'email_verified_at' => now(),
-            'is_admin' => true,
-        ]);
-
-        User::create([
-            'name' => 'Staff Admin',
-            'email' => 'staff@sewaalatberat.com',
-            'password' => Hash::make('staff123'),
-            'email_verified_at' => now(),
-            'is_admin' => false,
-        ]);
     }
 }

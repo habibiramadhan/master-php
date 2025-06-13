@@ -22,7 +22,7 @@
                             <i class="bi bi-speedometer2 me-1"></i>Admin Dashboard
                         </x-nav-link>
                         
-                        <x-nav-link :href="'#'" :active="request()->routeIs('admin.peralatan*')">
+                        <x-nav-link :href="route('admin.peralatan.index')" :active="request()->routeIs('admin.peralatan*')">
                             <i class="bi bi-truck me-1"></i>Peralatan
                         </x-nav-link>
                         
@@ -102,7 +102,7 @@
                     Admin Dashboard
                 </x-responsive-nav-link>
                 
-                <x-responsive-nav-link :href="'#'" :active="request()->routeIs('admin.peralatan*')">
+                <x-responsive-nav-link :href="route('admin.peralatan.index')" :active="request()->routeIs('admin.peralatan*')">
                     Peralatan
                 </x-responsive-nav-link>
                 

@@ -31,3 +31,5 @@ php artisan make:model Pengaturan
 # Buat seeder
 php artisan make:seeder PengaturanSeeder
 php artisan make:seeder PeralatanSeeder
+
+https://github.com/habibiramadhan/master-php/archive/refs/heads/main.zip

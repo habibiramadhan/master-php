@@ -180,7 +180,7 @@
                         <div class="card-body">
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <a href="#" class="btn btn-outline-primary w-100 d-flex align-items-center justify-content-center py-3 text-decoration-none">
+                                    <a href="{{ route('admin.peralatan.create') }}" class="btn btn-outline-primary w-100 d-flex align-items-center justify-content-center py-3 text-decoration-none">
                                         <i class="bi bi-plus-circle me-2"></i>Tambah Peralatan
                                     </a>
                                 </div>
@@ -193,12 +193,12 @@
                                     </a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="#" class="btn btn-outline-success w-100 d-flex align-items-center justify-content-center py-3 text-decoration-none">
+                                    <a href="{{ route('admin.pesanan.index') }}" class="btn btn-outline-success w-100 d-flex align-items-center justify-content-center py-3 text-decoration-none">
                                         <i class="bi bi-clipboard-data me-2"></i>Kelola Pesanan
                                     </a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="#" class="btn btn-outline-warning w-100 d-flex align-items-center justify-content-center py-3 text-decoration-none">
+                                    <a href="{{ route('admin.pengaturan.index') }}" class="btn btn-outline-warning w-100 d-flex align-items-center justify-content-center py-3 text-decoration-none">
                                         <i class="bi bi-sliders me-2"></i>Pengaturan
                                     </a>
                                 </div>

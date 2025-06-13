@@ -27,17 +27,7 @@ class PengaturanSeeder extends Seeder
             // Info Pembayaran
             ['kunci' => 'nama_bank', 'nilai' => 'Bank BCA', 'tipe' => 'text'],
             ['kunci' => 'nomor_rekening', 'nilai' => '1234567890', 'tipe' => 'text'],
-            ['kunci' => 'nama_rekening', 'nilai' => 'CV Sewa Alat Berat', 'tipe' => 'text'],
-            
-            // Ketentuan Sewa
-            ['kunci' => 'minimum_hari_sewa', 'nilai' => '1', 'tipe' => 'number'],
-            ['kunci' => 'persentase_dp', 'nilai' => '20', 'tipe' => 'number'],
-            ['kunci' => 'biaya_antar', 'nilai' => '100000', 'tipe' => 'number'],
-            ['kunci' => 'biaya_jemput', 'nilai' => '100000', 'tipe' => 'number'],
-            
-            // Jam Operasional
-            ['kunci' => 'jam_operasional', 'nilai' => 'Senin - Jumat: 08:00 - 17:00\nSabtu: 08:00 - 12:00', 'tipe' => 'textarea'],
-            ['kunci' => 'kontak_darurat', 'nilai' => '08123456789', 'tipe' => 'text'],
+            ['kunci' => 'nama_rekening', 'nilai' => 'CV Sewa Alat Berat', 'tipe' => 'text']
         ];
 
         foreach ($pengaturan as $setting) {

@@ -2,124 +2,83 @@
 // app/Models/Pengaturan.php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
 class Pengaturan extends Model
 {
-    use HasFactory;
-
     protected $table = 'pengaturan';
+    protected $fillable = ['kunci', 'nilai', 'tipe'];
 
-    protected $fillable = [
-        'kunci',
-        'nilai',
-        'tipe'
-    ];
-
-    // Cache pengaturan untuk performa yang lebih baik
-    public static function ambil($kunci, $default = null)
+    public static function get($kunci, $default = null)
     {
-        return Cache::remember("pengaturan.$kunci", 3600, function () use ($kunci, $default) {
-            $pengaturan = self::where('kunci', $kunci)->first();
-            return $pengaturan ? $pengaturan->nilai : $default;
+        return Cache::remember("pengaturan_{$kunci}", 3600, function () use ($kunci, $default) {
+            return static::where('kunci', $kunci)->value('nilai') ?? $default;
         });
     }
 
-    public static function atur($kunci, $nilai, $tipe = 'text')
+    public static function set($kunci, $nilai, $tipe = 'text')
     {
-        $pengaturan = self::updateOrCreate(
+        static::updateOrCreate(
             ['kunci' => $kunci],
             ['nilai' => $nilai, 'tipe' => $tipe]
         );
-
-        // Hapus cache
-        Cache::forget("pengaturan.$kunci");
         
-        return $pengaturan;
+        Cache::forget("pengaturan_{$kunci}");
+        return true;
     }
 
-    public static function ambilSemua()
+    public static function getAll()
     {
-        return Cache::remember('pengaturan.semua', 3600, function () {
-            return self::pluck('nilai', 'kunci')->toArray();
+        return Cache::remember('pengaturan_all', 3600, function () {
+            return static::pluck('nilai', 'kunci');
         });
     }
 
-    // Kelompokkan pengaturan berdasarkan prefix
-    public static function ambilKelompok($prefix)
+    public static function forget($kunci = null)
     {
-        return Cache::remember("pengaturan.kelompok.$prefix", 3600, function () use ($prefix) {
-            return self::where('kunci', 'like', $prefix . '%')
-                      ->pluck('nilai', 'kunci')
-                      ->toArray();
-        });
-    }
-
-    // Hapus semua cache pengaturan
-    public static function hapusCache()
-    {
-        $kunci = self::pluck('kunci');
-        foreach ($kunci as $key) {
-            Cache::forget("pengaturan.$key");
+        if ($kunci) {
+            Cache::forget("pengaturan_{$kunci}");
+        } else {
+            Cache::forget('pengaturan_all');
         }
-        Cache::forget('pengaturan.semua');
     }
 
-    // Helper methods untuk pengaturan khusus
-    public static function namaPerusahaan()
+    public static function getNamaPerusahaan()
     {
-        return self::ambil('nama_perusahaan', 'CV Sewa Alat Berat');
+        return static::get('nama_perusahaan', 'CV Sewa Alat Berat');
     }
 
-    public static function emailPerusahaan()
-    {
-        return self::ambil('email_perusahaan', 'info@example.com');
-    }
-
-    public static function teleponPerusahaan()
-    {
-        return self::ambil('telepon_perusahaan', '08123456789');
-    }
-
-    public static function alamatPerusahaan()
-    {
-        return self::ambil('alamat_perusahaan', 'Alamat belum diatur');
-    }
-
-    public static function infoPembayaran()
+    public static function getInfoPembayaran()
     {
         return [
-            'nama_bank' => self::ambil('nama_bank', 'Bank BCA'),
-            'nomor_rekening' => self::ambil('nomor_rekening', '1234567890'),
-            'nama_rekening' => self::ambil('nama_rekening', 'CV Sewa Alat Berat'),
+            'nama_bank' => static::get('nama_bank', 'Bank BCA'),
+            'nomor_rekening' => static::get('nomor_rekening', '1234567890'),
+            'nama_rekening' => static::get('nama_rekening', 'CV Sewa Alat Berat'),
         ];
     }
 
-    public static function ketentuanSewa()
+    public static function getInfoKontak()
     {
         return [
-            'minimum_hari_sewa' => (int) self::ambil('minimum_hari_sewa', 1),
-            'persentase_dp' => (int) self::ambil('persentase_dp', 20),
-            'biaya_antar' => (int) self::ambil('biaya_antar', 100000),
-            'biaya_jemput' => (int) self::ambil('biaya_jemput', 100000),
+            'telepon' => static::get('telepon_perusahaan', '08123456789'),
+            'whatsapp' => static::get('whatsapp_perusahaan', '628123456789'),
+            'email' => static::get('email_perusahaan', 'info@sewaalatberat.com'),
+            'alamat' => static::get('alamat_perusahaan', 'Jakarta'),
         ];
     }
 
-    // Boot method untuk hapus cache saat model events
-    protected static function boot()
+    public static function getSosialMedia()
     {
-        parent::boot();
+        return [
+            'facebook' => static::get('facebook'),
+            'instagram' => static::get('instagram'),
+        ];
+    }
 
-        static::saved(function ($model) {
-            Cache::forget("pengaturan.{$model->kunci}");
-            Cache::forget('pengaturan.semua');
-        });
-
-        static::deleted(function ($model) {
-            Cache::forget("pengaturan.{$model->kunci}");
-            Cache::forget('pengaturan.semua');
-        });
+    public static function getLogo()
+    {
+        $logo = static::get('logo_perusahaan');
+        return $logo ? asset('storage/' . $logo) : null;
     }
 }

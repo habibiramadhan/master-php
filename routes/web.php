@@ -49,8 +49,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('laporan/export', [LaporanController::class, 'export'])->name('laporan.export');
     
     // Pengaturan Routes
-    Route::get('pengaturan', [PengaturanController::class, 'index'])->name('pengaturan.index');
-    Route::patch('pengaturan', [PengaturanController::class, 'update'])->name('pengaturan.update');
+    Route::get('/pengaturan', [PengaturanController::class, 'index'])->name('pengaturan.index');
+    Route::patch('/pengaturan', [PengaturanController::class, 'update'])->name('pengaturan.update');
+    Route::delete('/pengaturan/delete-logo', [PengaturanController::class, 'deleteLogo'])->name('pengaturan.delete-logo');
 });
 
 require __DIR__.'/auth.php';

@@ -34,7 +34,7 @@
                             <i class="bi bi-credit-card me-1"></i>Verifikasi
                         </x-nav-link>
                         
-                        <x-nav-link :href="'#'" :active="request()->routeIs('admin.pengaturan*')">
+                        <x-nav-link :href="route('admin.pengaturan.index')" :active="request()->routeIs('admin.pengaturan*')">
                             <i class="bi bi-sliders me-1"></i>Pengaturan
                         </x-nav-link>
                     @endif
@@ -114,7 +114,7 @@
                     Verifikasi Pembayaran
                 </x-responsive-nav-link>
                 
-                <x-responsive-nav-link :href="'#'" :active="request()->routeIs('admin.pengaturan*')">
+                <x-responsive-nav-link :href="route('admin.pengaturan.index')" :active="request()->routeIs('admin.pengaturan*')">
                     Pengaturan
                 </x-responsive-nav-link>
             @endif

@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('pesanan', function (Blueprint $table) {
             $table->id();
             $table->string('kode_pesanan', 20)->unique();
-            $table->string('kode_tracking', 15)->nullable()->unique();
+            $table->string('kode_tracking', 20)->nullable()->unique();
             
             // Info Pelanggan
             $table->string('nama_pelanggan', 100);

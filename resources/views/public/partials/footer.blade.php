@@ -103,7 +103,6 @@
                 </div>
                 <div class="col-md-6 text-md-end">
                     <p class="text-light opacity-50 mb-0 small">
-                        Powered by Laravel | 
                         <a href="{{ route('login') }}" class="text-warning text-decoration-none">Admin Login</a>
                     </p>
                 </div>

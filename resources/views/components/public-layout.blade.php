@@ -1,5 +1,5 @@
 {{-- resources/views/components/public-layout.blade.php --}}
-@props(['title' => null, 'pengaturan' => []])
+@props(['title' => null])
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -92,13 +92,13 @@
 </head>
 
 <body>
-    @include('public.partials.navbar', ['pengaturan' => $pengaturan])
+    @include('public.partials.navbar')
     
     <main>
         {{ $slot }}
     </main>
     
-    @include('public.partials.footer', ['pengaturan' => $pengaturan])
+    @include('public.partials.footer')
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     @stack('scripts')

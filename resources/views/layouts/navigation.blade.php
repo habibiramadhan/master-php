@@ -26,11 +26,11 @@
                             <i class="bi bi-truck me-1"></i>Peralatan
                         </x-nav-link>
                         
-                        <x-nav-link :href="'#'" :active="request()->routeIs('admin.pesanan*')">
+                        <x-nav-link :href="route('admin.pesanan.index')" :active="request()->routeIs('admin.pesanan*')">
                             <i class="bi bi-clipboard-data me-1"></i>Pesanan
                         </x-nav-link>
                         
-                        <x-nav-link :href="'#'" :active="request()->routeIs('admin.pembayaran*')">
+                        <x-nav-link :href="route('admin.verifikasi.index')" :active="request()->routeIs('admin.verifikasi*')">
                             <i class="bi bi-credit-card me-1"></i>Verifikasi
                         </x-nav-link>
                         
@@ -106,11 +106,11 @@
                     Peralatan
                 </x-responsive-nav-link>
                 
-                <x-responsive-nav-link :href="'#'" :active="request()->routeIs('admin.pesanan*')">
+                <x-responsive-nav-link :href="route('admin.pesanan.index')" :active="request()->routeIs('admin.pesanan*')">
                     Pesanan
                 </x-responsive-nav-link>
                 
-                <x-responsive-nav-link :href="'#'" :active="request()->routeIs('admin.pembayaran*')">
+                <x-responsive-nav-link :href="route('admin.verifikasi.index')" :active="request()->routeIs('admin.verifikasi*')">
                     Verifikasi Pembayaran
                 </x-responsive-nav-link>
                 

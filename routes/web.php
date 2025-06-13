@@ -27,6 +27,11 @@ Route::middleware('auth')->group(function () {
 // Admin Routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('/verifikasi', [AdminController::class, 'verifikasiPembayaran'])->name('verifikasi.index');
+    Route::post('/verifikasi/{id}/approve', [AdminController::class, 'verifikasiApprove'])->name('verifikasi.approve');
+    Route::post('/verifikasi/{id}/reject', [AdminController::class, 'verifikasiReject'])->name('verifikasi.reject');
+    
     // Peralatan Routes
     Route::resource('peralatan', PeralatanController::class);
     

@@ -185,7 +185,7 @@
                                     </a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="#" class="btn btn-outline-info w-100 d-flex align-items-center justify-content-center py-3 text-decoration-none">
+                                    <a href="{{ route('admin.verifikasi.index') }}" class="btn btn-outline-info w-100 d-flex align-items-center justify-content-center py-3 text-decoration-none">
                                         <i class="bi bi-credit-card me-2"></i>Verifikasi Pembayaran
                                         @if($stats['pesanan_verifikasi'] > 0)
                                             <span class="badge bg-danger ms-2">{{ $stats['pesanan_verifikasi'] }}</span>

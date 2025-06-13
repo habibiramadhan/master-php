@@ -1,13 +1,12 @@
 {{-- resources/views/public/partials/navbar.blade.php --}}
-<!-- DEBUG: Cek data pengaturan -->
-<!-- @php
+@php
     var_dump('=== DEBUG NAVBAR ===');
     var_dump('isset pengaturan:', isset($pengaturan));
     if(isset($pengaturan)) {
         var_dump('pengaturan data:', $pengaturan);
     }
     var_dump('=== END DEBUG ===');
-@endphp -->
+@endphp
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-construction sticky-top">
     <div class="container">
